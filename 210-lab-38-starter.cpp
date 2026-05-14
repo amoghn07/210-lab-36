@@ -13,7 +13,7 @@ int main() {
     //creating a BST
     IntBinaryTree tree;
 
-    while (choice != 0){
+    while (true){
         cout << "1. Add a record\n";
         cout << "2. Delete a record\n";
         cout << "3. Search if a record exists\n";
@@ -22,6 +22,13 @@ int main() {
         cout << "0. Quit\n";
         cout << "Enter your choice(0-5): ";
         cin >> choice;
+        //error handling for non int choice
+        if (cin.fail()) {
+            cin.clear();
+            cin.ignore(10000, '\n');
+            cout << "Please enter a valid number.\n";
+            continue;
+        }
 
         if (choice == 0){
             break;
@@ -46,6 +53,19 @@ int main() {
             if (result) cout << "Record exists.\n";
             else cout << "Record does not exist.\n";
         }
+        else if (choice == 4){
+            cout << "Enter record to be modified: ";
+            cin >> val;
+            if (tree.searchNode(val)){
+                tree.remove(val);
+                cout << "Enter new record value: ";
+                string newVal;
+                cin >> newVal;
+                tree.insertNode(newVal);
+                cout << "Record modified.\n";
+            }
+            else cout << "Record not found.\n";
+        }
         else if (choice == 5){
             cout << "Displaying tree: \n";
             tree.displayInOrder();
@@ -54,6 +74,7 @@ int main() {
             cout << "Please enter a valid choice between 0 and 5.\n";
         }
     }
+    fin.close();
 
     return 0;
 }
