@@ -1,4 +1,4 @@
-//moved declarations up here to use string in class def.
+//moved declarations up here to use string in class def
 #include <string>
 using namespace std;
 
