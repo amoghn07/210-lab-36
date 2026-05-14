@@ -8,7 +8,7 @@ using namespace std;
 int main() {
     ifstream fin;
     string val;
-    int choice;
+    int choice = 1;
     fin.open("codes.txt");
     //creating a BST
     IntBinaryTree tree;
@@ -23,29 +23,37 @@ int main() {
         cout << "Enter your choice(0-5): ";
         cin >> choice;
 
-        if (choice == 1){
+        if (choice == 0){
+            break;
+        }
+        else if (choice == 1){
             fin >> val;
             tree.insertNode(val);
         }
         else if (choice == 2){
             cout << "Enter record to be deleted: ";
             cin >> val;
-            tree.remove(val);
+            if (tree.searchNode(val)){
+                tree.remove(val);
+                cout << "Record removed.\n";
+            }
+            else cout << "Record not found\n";
         }
         else if (choice == 3){
             cout << "Enter record to search for: ";
             cin >> val; 
             bool result = tree.searchNode(val);
-            if (result) cout << "Record exists.";
-            else cout << "Record does not exist.";
+            if (result) cout << "Record exists.\n";
+            else cout << "Record does not exist.\n";
+        }
+        else if (choice == 5){
+            cout << "Displaying tree: \n";
+            tree.displayInOrder();
+        }
+        else{
+            cout << "Please enter a valid choice between 0 and 5.\n";
         }
     }
-    //populating tree with for loop
-    for (int i = 0; i < 10; i++){
-        fin >> val;
-        tree.insertNode(val);
-    }
-    tree.displayInOrder();
 
     return 0;
 }
